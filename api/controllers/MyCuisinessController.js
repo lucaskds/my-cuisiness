@@ -1,8 +1,8 @@
-const ZomatoClient = require('../../ZomatoClient');
+const ZomatoRepository = require('../../api/repositories/ZomatoRepository');
 
 class MyCuisinessController {
   constructor() { 
-    this.zomatoClient = new ZomatoClient();
+    this.zomatoRepository = new ZomatoRepository();
   }
 
   async getCategories() {

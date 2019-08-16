@@ -5,31 +5,33 @@ class MyCuisinessRoutes {
   constructor() {
     this.myCuisinessController = new MyCuisinessController();
     this.router = express.Router();
-    this.categoriesRoute();
-    this.citiesRoute();
+    this.rootRoute();
+    this.randomRestaurantRoute();
   }
 
   getRoutes() {
     return this.router;
   }
 
-  categoriesRoute() {
-    this.router.get('/categories', async (req, res) => {
-      try {
-        const response = await this.myCuisinessController.getCategories();
-        res.send({ categories: response });
-      } catch(error) {
-        console.log(error);
-      }
+  rootRoute() {
+    this.router.get('', async (req, res) => {
+      res.send({
+        title: 'Hi!',
+        message: 'Welcome to My Cuisiness API :)'
+      })
     });
   }
 
-  citiesRoute() {
-    this.router.get('/cities', (req, res) => {
-      this.myCuisinessController.getCategories().then((response) => {
-        res.send({ categories: response });
-      })
-      .catch(error => console.log(error));
+  randomRestaurantRoute() {
+    this.router.post('/surprise-me', async (req, res) => {
+      const params = req.query;
+      
+      try {
+        const response = await this.myCuisinessController.getRandomRestaurant(params);
+        res.send(response);
+      } catch(error) {
+        console.log(error);
+      }
     });
   }
 }
