@@ -9,7 +9,16 @@ class ZomatoClient {
   async categories() {
     try {
       const categories = await this.client.getCategories();
-      return categories;
+      return categories.categories;
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  async search(params) {
+    try {
+      const restaurants = await this.client.search(params);
+      return restaurants.restaurants;
     } catch(error) {
       console.log(error);
     }
