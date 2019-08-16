@@ -1,0 +1,27 @@
+{
+  "name": "mycuisiness",
+  "version": "1.0.0",
+  "description": "Handle your Cuisine Business",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucaskds/my-cuisiness.git"
+  },
+  "author": "Lucas Krämer de Sousa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucaskds/my-cuisiness/issues"
+  },
+  "homepage": "https://github.com/lucaskds/my-cuisiness#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "zomato-api": "^0.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
