@@ -1,13 +1,13 @@
-# My Cuisiness - Your Cuisine Business App
+# My Cuisiness - Your Random Restaurant App
 
 ## What can I do?
-Whit My Cuisiness you can ... TBD.
+Given a latitude and longitude, I can show you a random restaurant to discover!
 
-### Feature 1
-With Feature 1 you can ... TBD
+## How it works?
+Send me a POST request in https://my-cuisiness.herokuapp.com/surprise-me
 
-### Feature 2
-With Feature 2 you can ... TBD
+With this query parameters:
+- lat: <your_latitude_here>
+- lon: <your_longitude_here>
 
-### Feature n
-With Feature n you can ... TBD
+E.g: https://my-cuisiness.herokuapp.com/surprise-me?lat=<your_latitude_here>&lon=<your_longitude_here>
