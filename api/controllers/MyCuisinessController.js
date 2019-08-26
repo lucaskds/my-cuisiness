@@ -6,17 +6,24 @@ class MyCuisinessController {
   }
 
   async getRandomRestaurant(params) {
-    const categories = await this.zomatoRepository.getCategories();
-    const category = this.randomCategory(categories);
-    
-    Object.assign(params, { category, radius: 2000 })
-    const restaurants = await this.zomatoRepository.search(params);
-    const restaurant = this.randomRestaurant(restaurants);
+    try {
+      const categories = await this.zomatoRepository.getCategories();
+      const category = this.randomCategory(categories);
+      
+      Object.assign(params, { category, radius: 2000 })
+      const restaurants = await this.zomatoRepository.search(params);
+      if (restaurants.length < 1) {
+        return this.getRandomRestaurant(params);
+      }
+      const restaurant = this.randomRestaurant(restaurants);
 
-    return {
-      name: restaurant.name,
-      location: restaurant.location
-    };
+      return {
+        name: restaurant.name,
+        location: restaurant.location
+      };
+    } catch {
+      return { error: 'Sorry, something went wrong...' };
+    }  
   }
 
   randomCategory(categories) {
@@ -25,7 +32,8 @@ class MyCuisinessController {
   }
 
   randomRestaurant(restaurants) {
-    return restaurants[Math.floor(Math.random() * restaurants.length)].restaurant;
+    const restaurant = restaurants[Math.floor(Math.random() * restaurants.length)];
+    return restaurant.restaurant;
   }
 }
 
