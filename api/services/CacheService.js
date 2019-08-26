@@ -2,7 +2,8 @@ const Redis = require('ioredis');
 
 class CacheService {
   constructor(domain, expireTime) {
-    this.redis = new Redis(process.env.REDIS_URL, {
+    const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379'
+    this.redis = new Redis(redisUrl, {
       enableOfflineQueue: false,
       connectTimeout: 1000,
       keyPrefix: domain
