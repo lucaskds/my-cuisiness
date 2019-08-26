@@ -4,7 +4,7 @@
 Given a latitude and longitude, I can show you a random restaurant to discover!
 
 ## How it works?
-Send me a POST request in https://my-cuisiness.herokuapp.com/surprise-me
+Send me a GET request in https://my-cuisiness.herokuapp.com/surprise-me
 
 With this query parameters:
 - lat: <your_latitude_here>
