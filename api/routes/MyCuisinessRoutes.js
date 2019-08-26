@@ -23,7 +23,7 @@ class MyCuisinessRoutes {
   }
 
   randomRestaurantRoute() {
-    this.router.post('/surprise-me', async (req, res) => {
+    this.router.get('/surprise-me', async (req, res) => {
       const params = req.query;
       
       try {
