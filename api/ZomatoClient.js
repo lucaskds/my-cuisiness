@@ -13,35 +13,23 @@ class ZomatoClient {
     }
 
     async callZomato(path) {
-        try {
-            const response = await axios.get(path, this.config);
-            const { data } = response;
-            return data;
-        } catch (error) {
-            console.log('Error: ', error);
-        }
+        const response = await axios.get(path, this.config);
+        const { data } = response;
+        return data;
     }
 
     async categories() {
         const path = 'https://developers.zomato.com/api/v2.1/categories';
 
-        try {
-            const categories = await this.callZomato(path);
-            return categories.categories;
-        } catch (error) {
-            console.log('Error: ', error);
-        }
+        const categories = await this.callZomato(path);
+        return categories.categories;
     }
 
     async search(params) {
         const path = 'https://developers.zomato.com/api/v2.1/search?';
 
-        try {
-            const restaurants = await this.callZomato(path.concat(params));
-            return restaurants.restaurants;
-        } catch (error) {
-            console.log('Error: ', error);
-        }
+        const restaurants = await this.callZomato(path.concat(params));
+        return restaurants.restaurants;
     }
 }
 

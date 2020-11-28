@@ -22,6 +22,7 @@ class ZomatoRepository {
             return JSON.parse(categories);
         } catch (error) {
             console.log('Error: ', error);
+            throw new Error('Sorry, the third-party API is experiencing some issues :(');
         }
     }
 
@@ -36,6 +37,7 @@ class ZomatoRepository {
             return await this.zomatoClient.search(categoryPath);
         } catch (error) {
             console.log('Error: ', error);
+            throw new Error('Sorry, the third-party API is experiencing some issues :(');
         }
     }
 }
