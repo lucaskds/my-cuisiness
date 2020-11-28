@@ -12,6 +12,7 @@ services:
             - "3000:3000"
         environment:
             - REDIS_URL=redis://cache
+            - ZOMATO_KEY=${ZOMATO_KEY}
         depends_on:
             - redis
     
