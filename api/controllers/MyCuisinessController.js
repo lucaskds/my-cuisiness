@@ -21,8 +21,8 @@ class MyCuisinessController {
                 name: restaurant.name,
                 location: restaurant.location,
             };
-        } catch {
-            return { error: 'Sorry, something went wrong...' };
+        } catch (error) {
+            return { error };
         }
     }
 
