@@ -1,6 +1,7 @@
-require('dotenv').config()
+require('dotenv').config();
 
-const express = require("express");
+const express = require('express');
+
 const app = express();
 const MyCuisinessRoutes = require('./api/routes/MyCuisinessRoutes');
 
@@ -11,4 +12,4 @@ app.use('/', myCuisinessRoutes.getRoutes());
 
 app.listen(port);
 
-console.log("My Cuisiness is running");
+console.log('My Cuisiness is running');
