@@ -26,12 +26,12 @@ class MyCuisinessController {
         }
     }
 
-    randomCategory(categories) {
+    static randomCategory(categories) {
         const categoriesIds = Object.keys(categories);
         return categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
     }
 
-    randomRestaurant(restaurants) {
+    static randomRestaurant(restaurants) {
         const restaurant = restaurants[Math.floor(Math.random() * restaurants.length)];
         return restaurant.restaurant;
     }
