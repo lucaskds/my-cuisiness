@@ -45,23 +45,23 @@ describe('ZomatoRepository', () => {
     describe('search', () => {
         it('It should search Zomato restaurants', async () => {
             const params = {
-                category: 'test',
-                lat: '123',
-                lon: '456',
-                radius: '2000',
+                category: 10,
+                lat: '12.34567',
+                lon: '-32.333',
+                radius: 2000,
             };
             this.zomatoRepository.zomatoClient.search = jest.fn();
             await this.zomatoRepository.search(params);
             expect(this.zomatoRepository.zomatoClient.search).toHaveBeenCalledTimes(1);
-            expect(this.zomatoRepository.zomatoClient.search).toHaveBeenCalledWith('lat=123&lon=456&radius=2000&category=test&');
+            expect(this.zomatoRepository.zomatoClient.search).toHaveBeenCalledWith('lat=12.34567&lon=-32.333&radius=2000&category=10&sort=real_distance');
         });
 
         it('It should throw Error when Zomato returns error', async () => {
             try {
-                this.zomatoRepository.zomatoClient.categories = jest.fn(() => {
+                this.zomatoRepository.zomatoClient.search = jest.fn(() => {
                     throw new Error('Error thrown');
                 });
-                await this.zomatoRepository.getCategories();
+                await this.zomatoRepository.search();
             } catch (e) {
                 expect(e.message).toEqual('Sorry, the third-party API is experiencing some issues :(');
             }

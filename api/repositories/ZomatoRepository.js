@@ -29,12 +29,13 @@ class ZomatoRepository {
     async search(params) {
         try {
             const path = '';
-            const latPath = path.concat(`lat=${params.lat.replace(',', '.')}&`);
-            const lonPath = latPath.concat(`lon=${params.lon.replace(',', '.')}&`);
-            const radiusPath = lonPath.concat(`radius=${params.radius}&`);
-            const categoryPath = radiusPath.concat(`category=${params.category}&`);
+            const searchPath = path.concat(`lat=${params.lat.replace(',', '.')}&`)
+                .concat(`lon=${params.lon.replace(',', '.')}&`)
+                .concat(`radius=${params.radius}&`)
+                .concat(`category=${params.category}&`)
+                .concat('sort=real_distance');
 
-            return await this.zomatoClient.search(categoryPath);
+            return await this.zomatoClient.search(searchPath);
         } catch (error) {
             throw new Error(DEFAULT_ERROR_MSG);
         }
