@@ -41,6 +41,20 @@ describe('CacheService', () => {
             expect(this.cacheService.redis.get).toHaveBeenCalledWith(subDomain + key);
         });
 
+        it('Should return value storageFunction result after redis.set', async () => {
+            const subDomain = 'testSubDomain';
+            const key = 'testKey';
+            const expected = 'Expected return';
+            const storeFunction = jest.fn().mockResolvedValue(expected);
+            this.cacheService.redis.get = jest.fn().mockResolvedValue();
+            this.cacheService.redis.set = jest.fn().mockResolvedValue();
+
+            expect(await this.cacheService.get(subDomain, key, storeFunction)).toBe(expected);
+            expect(storeFunction).toHaveBeenCalled();
+            expect(this.cacheService.redis.get).toHaveBeenCalledWith(subDomain + key);
+            expect(this.cacheService.redis.set).toHaveBeenCalledWith(subDomain + key, expected, 'EX', EXPIRE_TIME);
+        });
+
         it('Should return value on reject if cache not set', async () => {
             const subDomain = 'testSubDomain';
             const key = 'testKey';
