@@ -13,7 +13,7 @@ class MyCuisinessController {
             Object.assign(params, { category, radius: 2000 });
             const restaurants = await this.zomatoRepository.search(params);
             if (restaurants.length < 1) {
-                return MyCuisinessController.getRandomRestaurant(params);
+                return this.getRandomRestaurant(params);
             }
             const restaurant = MyCuisinessController.randomRestaurant(restaurants);
 
