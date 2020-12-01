@@ -8,14 +8,14 @@ class MyCuisinessController {
     async getRandomRestaurant(params) {
         try {
             const categories = await this.zomatoRepository.getCategories();
-            const category = this.randomCategory(categories);
+            const category = MyCuisinessController.randomCategory(categories);
 
             Object.assign(params, { category, radius: 2000 });
             const restaurants = await this.zomatoRepository.search(params);
             if (restaurants.length < 1) {
-                return this.getRandomRestaurant(params);
+                return MyCuisinessController.getRandomRestaurant(params);
             }
-            const restaurant = this.randomRestaurant(restaurants);
+            const restaurant = MyCuisinessController.randomRestaurant(restaurants);
 
             return {
                 name: restaurant.name,

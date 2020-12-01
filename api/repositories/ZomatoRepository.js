@@ -2,11 +2,12 @@ const ZomatoClient = require('../ZomatoClient');
 const CacheService = require('../services/CacheService');
 
 const DEFAULT_DATA_CACHE_EXPIRE = 24 * 60 * 60; // 1 day cache
+const DEFAULT_ERROR_MSG = 'Sorry, the third-party API is experiencing some issues :(';
 
 class ZomatoRepository {
-    constructor() {
+    constructor(cacheService) {
         this.zomatoClient = new ZomatoClient();
-        this.cache = new CacheService('zomatoRepository', DEFAULT_DATA_CACHE_EXPIRE);
+        this.cache = cacheService || new CacheService('zomatoRepository', DEFAULT_DATA_CACHE_EXPIRE);
     }
 
     async getCategories() {
@@ -21,8 +22,7 @@ class ZomatoRepository {
             });
             return JSON.parse(categories);
         } catch (error) {
-            console.log('Error: ', error);
-            throw new Error('Sorry, the third-party API is experiencing some issues :(');
+            throw new Error(DEFAULT_ERROR_MSG);
         }
     }
 
@@ -36,8 +36,7 @@ class ZomatoRepository {
 
             return await this.zomatoClient.search(categoryPath);
         } catch (error) {
-            console.log('Error: ', error);
-            throw new Error('Sorry, the third-party API is experiencing some issues :(');
+            throw new Error(DEFAULT_ERROR_MSG);
         }
     }
 }
