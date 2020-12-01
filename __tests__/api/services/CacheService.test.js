@@ -41,7 +41,7 @@ describe('CacheService', () => {
             expect(this.cacheService.redis.get).toHaveBeenCalledWith(subDomain + key);
         });
 
-        it('Should throw error on storafeFunction rejection', async () => {
+        it('Should return value storageFunction result after redis.set', async () => {
             const subDomain = 'testSubDomain';
             const key = 'testKey';
             const expected = 'Expected return';
