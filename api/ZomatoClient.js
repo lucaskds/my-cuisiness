@@ -1,13 +1,11 @@
 const axios = require('axios');
 
-const userKey = process.env.ZOMATO_KEY;
-
 class ZomatoClient {
     constructor() {
         this.config = {
             headers: {
                 Accept: 'application/json',
-                'user-key': userKey,
+                'user-key': process.env.ZOMATO_KEY,
             },
         };
     }

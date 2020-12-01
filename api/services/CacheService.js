@@ -11,27 +11,30 @@ class CacheService {
         this.expireTime = expireTime;
     }
 
-    get(subdomain, key, storeFunction) {
+    async get(subdomain, key, storeFunction) {
         return this.redis.get(subdomain + key)
             .then((value) => {
                 if (value) {
                     return Promise.resolve(value);
                 }
 
-                return storeFunction().then((result) => {
-                    this.redis.set(subdomain + key, result, 'EX', this.expireTime);
-                    return result;
-                });
+                return storeFunction().then((result) => this.redis
+                    .set(subdomain + key, result, 'EX', this.expireTime)
+                    .then(() => result));
             })
             .catch(() => storeFunction().then((result) => result));
     }
 
-    del(subdomain, keys) {
+    async del(subdomain, keys) {
         const keysToDelete = [];
         keys.forEach((key) => {
             keysToDelete.push(subdomain + key);
         });
-        this.redis.del(keysToDelete);
+        await this.redis.del(keysToDelete);
+    }
+
+    async closeConnection() {
+        return this.redis.disconnect();
     }
 }
 
